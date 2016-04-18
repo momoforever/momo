@@ -85,4 +85,25 @@ class StringField(Field):
     # varchar("variable char"), 可变长度的字符串,以下定义中的100表示最长长度,即字符串的可变范围为0~100
     # (char,为不可变长度字符串,会用空格字符补齐)
     def __int__(self, name=None, primary_key=False, default=None, ddl='varchar(100)'):
-        super().__init__(name, ddl, primary_key, default)
+        super(StringField, self).__init__(name, ddl, primary_key, default)
+
+# 整数域
+class IntergerField(Field):
+    def __init__(self, name=None, primary_key=False, default=0):
+        super(IntergerField, self).__init__(name, 'bigint', primary_key, default)
+
+# 布尔域
+class BooleanField(Field):
+    def __init__(self, name=None, default=False):
+        super(BooleanField, self).__init__(name, 'boolean', False, default)
+
+# 浮点数域
+class FloatField(Field):
+    def __init__(self, name=None, primary_key=False, default=0.0):
+        super(FloatField, self).__init__(name, 'real', primary_key, default)
+
+# 文本域
+class TextField(Field):
+    def __init__(self, name=None, default=None):
+        super(TextField, self).__init__(name, 'text', primary_key, default)
+
