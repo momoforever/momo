@@ -1,13 +1,22 @@
 #!/lab/gw_test_framework/app/venv/python3.5-rhes6.x86_64-epglib2/bin/python
 #  coding:utf-8
-
-
+#
+#    Author: Dream Liu
+#    Version: 1.0
+#
 
 import os
 import datetime
 import pexpect
 import subprocess
 import sys
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
+
+def _init():
+    global args
+    parser = ArgumentParser(prog='WMG', description='For clean & sync the useless wmg load',
+                            formatter_class=RawDescriptionHelpFormatter)
+    parser.add_argument('-s')
 
 def clean_file(file_dir, days=15):
     lists = os.listdir(file_dir)
@@ -77,7 +86,7 @@ def sync_file(sync_way, file_dir):
             print('sync fail!!!')
             sys.exit()
     elif sync_way == 'to1275':
-        sync_cmd = '/lab/gw_test_framework/epglib2/bin/lab_storage_sync sync -s SERO -d SELN ' + file_dir
+        sync_cmd = '/lab/gw_test_framework/epglib2/bin/lab_storage_sync sync -s SELN -d SERO ' + file_dir
         retcode = subprocess.call(sync_cmd, shell=True, stdout=open('/dev/null', 'w'), stderr=subprocess.STDOUT)
         if retcode == 1:
             print('sync fail!!!')
