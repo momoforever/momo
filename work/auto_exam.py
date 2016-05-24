@@ -18,10 +18,10 @@ def generate_exam(n):
         province = provinces[random.randint(0, provinces.__len__()-1)]
         print('% s . 以下哪个城市是 % s 的省会？' % (i, province))
         answers = random.sample(citys, 4)
+        match = 0
         for j in range(4):
-            match = 0
-            if answers[j] == config.get(province, 'city'):
-                match = match + 1
+                if answers[j] == config.get(province, 'city'):
+                    match = match + 1
         if match < 1:
             answers[random.randint(0, 3)] = config.get(province, 'city')
         print('A. % s' % answers[0])
@@ -30,4 +30,4 @@ def generate_exam(n):
         print('D. % s' % answers[3])
 
 if __name__ == '__main__':
-    generate_exam(28)
+    generate_exam(10)
